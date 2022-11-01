@@ -172,6 +172,7 @@
   
   .title{
     width: 85%;
+    margin-bottom: 15px;
   }
   
   .table-view{
@@ -345,8 +346,16 @@
     padding: 0;
     border: none;
     width: auto;
+    cursor: pointer;
+  }
+
+  .search-Btn:hover{
+    background-color: rgb(117, 114, 114);
   }
   
   #myChart{
     height: 400px !important;
   }
+
+ 
+ 

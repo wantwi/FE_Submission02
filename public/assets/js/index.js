@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.createElement("canvas");
   canvas.setAttribute("id", "chart");
   canvas.setAttribute("width", "300");
-  canvas.setAttribute("height", "100");
+  canvas.setAttribute("height", "70");
   document.querySelector("#chart-container").appendChild(canvas);
 
   /**
