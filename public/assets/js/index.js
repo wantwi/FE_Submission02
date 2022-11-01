@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutEl = document.getElementById("logout");
   const saleSammayDiv = document.getElementById("saleSammayDiv");
   const switchBtn = document.getElementById("switch");
+  const chartTitle = document.getElementById("title")
   let SalesOverTimeWeek = [],
     SalesOverTimeYear = [],
     saleSummary = [];
@@ -180,6 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
             beginAtZero: true,
           },
         },
+        plugins: {
+            legend: {
+                display: false,
+              position: "top",
+            },
+            title: {
+              display: false,
+              text: "Whom'st let the dogs out",
+            },
+        }
       },
     });
   };
@@ -335,12 +346,15 @@ document.addEventListener("DOMContentLoaded", () => {
     isChecked = !isChecked;
     chart.destroy();
     if (!isChecked) {
-      console.log({ SalesOverTimeWeek });
+        chartTitle.innerText="Revenue (Last 7 days)"
       renderChart(reOrderDaysList(), reOrderValues(SalesOverTimeWeek));
     } else {
-      console.log({ SalesOverTimeYear });
+        chartTitle.innerText = "Revenue (Last 12 months)"
       renderChart(reOrderMonthList(), reOrderValues(SalesOverTimeYear));
     }
+
+
+   
   });
 
 });

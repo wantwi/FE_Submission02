@@ -169,6 +169,7 @@
     border-bottom: 0;
   }
   
+  
   .title{
     width: 85%;
   }
@@ -182,7 +183,7 @@
   }
   .table-wrapper{
   overflow: auto;
-  height: 400px; 
+  height: 450px; 
   /* height: 500px; */
   border: 1px solid;
   }
@@ -215,6 +216,12 @@
   .product-item > p{
     margin-top: 20px;
     padding-left: 10px;
+  }
+
+  .chart-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
   
   
@@ -270,6 +277,8 @@
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
+
+
   
   /* Rounded sliders */
   .slider.round {
