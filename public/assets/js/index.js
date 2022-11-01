@@ -95,6 +95,18 @@ const reOrderValues = (data) => {
 
 
 /**
+ * Formate Currency
+ * @param {number} value 
+ * @returns string
+ */
+const currentFormater =  (value) => {
+        return value.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          }).replace(".00","")
+}
+
+/**
  * Converting object of array to array of objects
  * @param {object} data 
  */
@@ -250,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     todaySale.title = "Today";
     todaySale.orders = todaySaleObj?.orders;
-    todaySale.total = todaySaleObj?.total;
+    todaySale.total = currentFormater(todaySaleObj?.total);
 
     //Get todays sales from sales_over_time_week
     let lastMonthSale = {};
@@ -258,11 +270,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastMonthSale.title = "Last Month";
     lastMonthSale.orders = lastMonthSaleObj?.orders;
-    lastMonthSale.total = lastMonthSaleObj?.total;
+    lastMonthSale.total = currentFormater(lastMonthSaleObj?.total)
 
     saleSummary = [
       todaySale,
-      { title: "Last Week", orders: 9, total: 30493 },
+      { title: "Last Week", orders: 9, total: currentFormater(30493343) },
       lastMonthSale,
     ];
 
@@ -313,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderSalesSummay = (data) => {
     let template = ``;
     data.forEach((x) => {
-      template += `<div class="min-card"><h4>${x?.title}</h4><p>$${x?.total}K / ${x?.orders} orders</p></div>`;
+      template += `<div class="min-card"><h4>${x?.title}</h4><p>${x?.total}K / ${x?.orders} orders</p></div>`;
     });
 
     saleSammayDiv.innerHTML = template;
