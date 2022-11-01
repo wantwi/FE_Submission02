@@ -4,10 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Freddy loves Halloween</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <h1>Dashboard Page</h1>
-    
+   
+    <main class="page-wrapper">
+        
+        <div class="side-bar">
+            <img class="logo" src="./assets/images/Freddys_Logo.svg" alt="logo" />
+            <div class="menu">
+                <ul>
+                    <li><a href="./index.html" class="active">Dashboard</a></li>
+                    <li><a href="./order.html">Order</a></li>
+                    <li id="logout">Logout</li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <h3>Dashboard</h3>
+            <div class="grid-card" id="saleSammayDiv"></div>
+
+            <div class="chart-wrapper">
+                <div class="chart-header">
+                    <h3 class="title">Revenue (Last 7 days) </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="switch">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div id="chart-container"></div>
+               
+            </div>
+
+            <div class="table-view">
+                <h3 class="title">Revenue (Last 7 days) </h3>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th># Unit Sold</th>
+                            <th>Revenu</th>
+                        </tr>
+                        <tbody id="tbody">
+                            <tr><td>Item 1</td><td>Item 1</td><td>Item 1</td><td>Item 1</td></tr>
+                        </tbody>
+                </table>
+                </div>
+                
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <script src="./assets/js/index.js"></script>
 </body>
 </html>

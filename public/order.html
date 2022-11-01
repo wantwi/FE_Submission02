@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order</title>
-</head>
-<body>
-    <h1>Order page</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freddy loves Halloween</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="page-wrapper">
+      <div class="side-bar">
+        <img class="logo" src="./assets/images/Freddys_Logo.svg" alt="logo" />
+        <div class="menu">
+          <ul>
+            <li><a href="./index.html">Dashboard</a></li>
+            <li><a href="./order.html" class="active">Order</a></li>
+            <li id="logout">Logout</li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="header">
+          <h2>Order</h2>
+          <div class="search-wrapper">
+            <button class="search-Btn" id="searchBtn">
+              <img class="search-icon" alt="search" src="./assets/images/search.png" />
+            </button>
+            <input class="search-input" placeholder="" id="search" />
+          </div>
+        </div>
+        <div class="table-view mt-5">
+          <div class="table-wrapper h-500">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="prev-btn btn" id="previousePageBtn">
+            <img alt="next" src="./assets/images/next.png" />
+          </button>
+          <p>
+            Page <span id="currentPage">0</span> of
+            <span id="totalPage">0</span>
+          </p>
+          <button class="btn" id="nextPageBtn">
+            <img alt="next" src="./assets/images/next.png" />
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="./assets/js/order.js"></script>
+  </body>
 </html>
+

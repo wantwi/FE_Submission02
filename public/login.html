@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Freddy loves Halloween</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-    <h1>Login page</h1>
+    <main class="login-wrapper">
+       <div class="login-header">
+        <p>
+            Freddy's Artisanal Halloween Candy Shop
+        </p>
+        <img class="logo" alt="logo" src="./assets/images/Freddys_Logo.svg"/>
+       </div>
+       <p id="errorMsg" className="danger"></p>
+
+       <form>
+            <input type="text" placeholder="username" name="username" id="username" />
+            <input type="password" placeholder="password" name="password" id="password" />
+            <button id="loginBtn" class="login-btn">Login</button>
+       </form>
+    </main>
+    <script src="./assets/js/login.js"></script>
 </body>
 </html>
