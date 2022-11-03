@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               window.location.href = './index.html'
             }
-           
+
 
         } catch (error) {
             console.error({error});
@@ -55,4 +55,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-//   { username: 'freddy', password: 'ElmStreet2019' }`
