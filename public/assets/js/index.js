@@ -1,134 +1,3 @@
-const date = new Date(Date.now());
-const today = date.getDay();
-const currentMonth = date.getMonth();
-
-const logout = () => {
-  sessionStorage.clear();
-  window.location.href = "./login.html";
-};
-
- /**
-   * Check if access token is set
-   */
-  let access_token = sessionStorage.getItem("access_token");
-  let refresh_token = sessionStorage.getItem("refresh_token");
-  if (
-    !access_token ||
-    access_token === null ||
-    access_token === "null" ||
-    access_token === undefined
-  ) {
-    logout();
-  }
-
-/**
- * Reoder months of the year to start with current month and previous month
- * @returns arry
- */
-const reOrderMonthList = () => {
-  let list, currentObj, previousObj, current;
-
-  current = currentMonth;
-  list = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  let copyList = list.slice();
-
-  if (current === 0) {
-    previousObj = copyList.pop();
-    currentObj = copyList.shift();
-  } else {
-    currentObj = copyList[current];
-    previousObj = copyList[current - 1];
-    const removed = copyList.splice(current - 1, 2);
-  }
-  return ["this month", "last month", ...copyList];
-};
-
-/**
- * Reoder week days to start with current day and previous day
- * @returns arry
- */
-const reOrderDaysList = () => {
-  let list, currentObj, previousObj, current;
-
-  current = today;
-  list = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-
-  let copyList = list.slice();
-
-  if (current === 0) {
-    previousObj = list.pop();
-    currentObj = list.shift();
-  } else {
-    currentObj = list[current - 1];
-    previousObj = list[current - 2];
-    const removed = list.splice(current - 1, 2);
-  }
-  return ["today", "yesterday", ...list];
-};
-
-/**
- * return an array of values
- * @param {object} 
- * @returns array
- */
-
-const reOrderValues = (data) => {
-  let coppy = Object.keys(data).map((key) => data[key]);
-  const removed = coppy.splice(today - 2, 2).reverse();
-  return [...removed, ...coppy].map((x) => x?.total);
-};
-
-
-
-/**
- * Formate Currency
- * @param {number} value 
- * @returns string
- */
-const currentFormater =  (value) => {
-        return value.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }).replace(".00","")
-}
-
-/**
- * Converting object of array to array of objects
- * @param {object} data 
- */
-const convertToArray =(data)=>{
-    return Object.keys(data).map(
-        (key) => data[key]
-      );
-
-}
-
-
-/**
- * Display product name and image
- * @param {object} product 
- * @returns 
- */
-const renderProductItem = (product) => {
-    return `<div id=${product?.id} class="product-item">
-        <img src=${product?.image} />
-        <p>${product?.name}</p>
-      </div>`;
-  };
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -325,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderSalesSummay = (data) => {
     let template = ``;
     data.forEach((x) => {
-      template += `<div class="min-card"><h4>${x?.title}</h4><p>${x?.total}K / ${x?.orders} orders</p></div>`;
+      template += `<div class="min-card"><h4>${x?.title}</h4><p>${x?.total.replace(".00","")}K / ${x?.orders} orders</p></div>`;
     });
 
     saleSammayDiv.innerHTML = template;
@@ -343,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { product, unit, revenue, price } = item;
       temp += `<tr><td>${renderProductItem(
         product
-      )}</td><td>${price}</td><td>${unit}</td><td>${revenue}</td></tr>`;
+      )}</td><td class="text-right">${currentFormater(price)}</td><td class="text-right">${unit}</td><td class="text-right">${currentFormater(revenue)}</td></tr>`;
     });
 
     console.log({ temp });
