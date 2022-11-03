@@ -78,36 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /**
-   * Get refreshed token
-   * @returns string
-   */
-  const getRefreshToken = async () => {
-    const request = await fetch("https://freddy.codesubmit.io/refresh", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${refresh_token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (request.status === 200) {
-      const response = await request.json();
-
-      sessionStorage.setItem("access_token", response?.access_token);
-
-      return response?.access_token;
-    } else {
-      logout();
-    }
-  };
-
-  /**
    * handle user logout
    */
   logoutEl.addEventListener("click", () => {
     logout();
   });
-
 
   
 /**
@@ -143,11 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     saleSummary = [
       todaySale,
-      { title: "Last Week", orders: 9, total: currentFormater(30493343) },
+      { title: "Last Week", orders: 120, total: currentFormater(34) },
       lastMonthSale,
     ];
 
-    console.log({ saleSammayDiv });
+   
 
     renderSalesSummay(saleSummary);
     renderChart(reOrderDaysList(), reOrderValues(SalesOverTimeWeek));
@@ -172,8 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (request.status === 401) {
         const token = getRefreshToken();
 
-        console.log({ token, request });
-
+      
         if (token) {
           getDashboardInfo();
         }
@@ -183,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       processResponse(response);
     } catch (error) {
-      console.log({ error });
+    
     }
   };
 
@@ -215,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       )}</td><td class="text-right">${currentFormater(price)}</td><td class="text-right">${unit}</td><td class="text-right">${currentFormater(revenue)}</td></tr>`;
     });
 
-    console.log({ temp });
+   
     tbody.innerHTML = temp;
   };
  

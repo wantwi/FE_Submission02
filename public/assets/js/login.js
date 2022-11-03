@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const useNameInput = document.getElementById("username")
     const usePasswordInput = document.getElementById("password")
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error({error});
-            //error.message
             errorMessage.innerText = `${error?.message}. Please provide a valid credential.`
             errorMessage.style.color = "red"
         }

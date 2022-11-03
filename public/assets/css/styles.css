@@ -8,17 +8,20 @@
     font-family: sans-serif;
     min-height: 90vh;
     background-color: rgb(224, 224, 224);
+    overflow-y: hidden;
   }
   
   /* Login Page Styles */
   .login-wrapper{
     width: 350px;
-    margin: 50px auto;
+    margin: 200px auto;
     border: 5px solid gray;
     min-height: 400px;
     display: flex;
     flex-direction: column;
     padding: 50px 20px 20px 20px;
+  
+   
   }
   .login-header{
     display: flex;

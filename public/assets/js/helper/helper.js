@@ -2,6 +2,9 @@ const date = new Date(Date.now());
 const today = date.getDay();
 const currentMonth = date.getMonth();
 
+let access_token = sessionStorage.getItem("access_token");
+let refresh_token = sessionStorage.getItem("refresh_token");
+
 const logout = () => {
   sessionStorage.clear();
   window.location.href = "./login.html";
@@ -10,8 +13,7 @@ const logout = () => {
  /**
    * Check if access token is set
    */
-  let access_token = sessionStorage.getItem("access_token");
-  let refresh_token = sessionStorage.getItem("refresh_token");
+
   if (
     !access_token ||
     access_token === null ||
@@ -137,3 +139,28 @@ const renderProductItem = (product) => {
         break;
     }
   };
+
+
+   /**
+   * get regresh token
+   * @returns string
+   */
+    const getRefreshToken = async () => {
+        const request = await fetch("https://freddy.codesubmit.io/refresh", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${refresh_token}`,
+            "Content-Type": "application/json",
+          },
+        });
+    
+        if (request.status === 200) {
+          const response = await request.json();
+    
+          sessionStorage.setItem("access_token", response?.access_token);
+    
+          return response?.access_token;
+        } else {
+          logout();
+        }
+      };

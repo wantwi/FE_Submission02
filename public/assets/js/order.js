@@ -1,38 +1,11 @@
-// const logout = () => {
-//   sessionStorage.setItem("access_token", null);
-//   sessionStorage.setItem("refresh_token", null);
-//   window.location.href = "./login.html";
-// };
-
-
-
-// const renderProductItem = (product) => {
-//   return ` <div id=${product?.id} class="product-item">
-//           <img src=${product?.image} />
-//           <p>${product?.name}</p>
-//         </div>`;
-// };
-
-// /**
-//  * Formate Currency
-//  * @param {number} value 
-//  * @returns string
-//  */
-//  const currentFormater =  (value) => {
-//   return value.toLocaleString('en-US', {
-//       style: 'currency',
-//       currency: 'USD',
-//     })
-// }
-
 
 document.addEventListener("DOMContentLoaded", () => {
-  let access_token = sessionStorage.getItem("access_token");
-  let refresh_token = sessionStorage.getItem("refresh_token");
+  // let access_token = sessionStorage.getItem("access_token");
+  // let refresh_token = sessionStorage.getItem("refresh_token");
 
-  if (!access_token) {
-    logout();
-  }
+  // if (!access_token) {
+  //   logout();
+  // }
 
   //Variables
   const tbody = document.getElementById("tbody");
@@ -44,31 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextPageBtn = document.getElementById("nextPageBtn");
   const searchBtn = document.getElementById("searchBtn");
 
+
+
   let pageCount = 1,
     totalPageCount = 0;
-  /**
-   * get regresh token
-   * @returns string
-   */
-  const getRefreshToken = async () => {
-    const request = await fetch("https://freddy.codesubmit.io/refresh", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${refresh_token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (request.status === 200) {
-      const response = await request.json();
-
-      sessionStorage.setItem("access_token", response?.access_token);
-
-      return response?.access_token;
-    } else {
-      logout();
-    }
-  };
+ 
 
   /**
    * handle user logout
@@ -78,13 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /**
-   * Fetch dashboard information
+   * Fetch all orders
    */
 
-  const fetchSearchOrder = async () => {
+  const fetchSearchOrder = async (query = "") => {
     try {
       const request = await fetch(
-        `https://freddy.codesubmit.io/orders?page=${pageCount}&q=${searchInput.value}`,
+        `https://freddy.codesubmit.io/orders?page=${pageCount}&q=${query}`,
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
@@ -112,17 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
       totalPage.innerText = response?.total;
       totalPageCount = response?.total;
     } catch (error) {
-      console.log({ error });
+     
     }
   };
 
+  //get all orders on page load
+  fetchSearchOrder()
+
   //handle search
   searchBtn.addEventListener("click", () => {
-    if (searchInput.value.length < 4) return;
-
     pageCount = 1;
     totalPageCount = 0;
-    fetchSearchOrder();
+    fetchSearchOrder(searchInput.value);
   });
 
   const canIncreaseCount = () => {
@@ -141,19 +95,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Go to previouse Page
   previousePageBtn.addEventListener("click", () => {
-    if (searchInput.value.length < 4 || pageCount === 1) return;
+    
     if (canDecreaseCount()) {
       pageCount = pageCount - 1;
-      fetchSearchOrder();
+      fetchSearchOrder(searchInput.value);
     }
   });
 
   //Go to next page
   nextPageBtn.addEventListener("click", () => {
-    if (searchInput.value.length < 4) return;
+   
     if (canIncreaseCount()) {
       pageCount = pageCount + 1;
-      fetchSearchOrder();
+      fetchSearchOrder(searchInput.value);
     }
   });
 
