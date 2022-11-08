@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        if(!useNameInput?.value && !usePasswordInput?.value){
+        if(!useNameInput?.value || !usePasswordInput?.value){
        
             errorMessage.innerText = "Username and password field is required"
             errorMessage.style.color = "red"
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
             username:useNameInput?.value,
             password:usePasswordInput?.value
         }
-       
         loginUser(data)
     })
 

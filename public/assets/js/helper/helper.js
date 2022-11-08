@@ -23,28 +23,30 @@ const logout = () => {
     logout();
   }
 
+
+
 /**
  * Reoder months of the year to start with current month and previous month
  * @returns arry
  */
 const reOrderMonthList = () => {
-  let list, currentObj, previousObj, current;
+  let currentObj, previousObj;
 
-  current = currentMonth;
-  list = ["Jan", "Feb","Mar","Apr","May","Jun", "Jul","Aug","Sep","Oct","Nov","Dec",
-  ];
+  let list = ["Jan", "Feb","Mar","Apr","May","Jun", "Jul","Aug","Sep","Oct","Nov","Dec"];
 
-  let copyList = list.slice();
-
-  if (current === 0) {
-    previousObj = copyList.pop();
-    currentObj = copyList.shift();
+  if (currentMonth === 0) {
+    previousObj = list.pop();
+    currentObj = list.shift();
   } else {
-    currentObj = copyList[current];
-    previousObj = copyList[current - 1];
-    const removed = copyList.splice(current - 1, 2);
+    //currentObj = copyList[currentMonth];
+    //previousObj = copyList[currentMonth - 1];
+    // const removed = copyList.splice(currentMonth - 1, 2);
+
+    const itemsRemoved  = list.splice(currentMonth - 1, 2).reverse();
+    currentObj = itemsRemoved[0]
+    previousObj = itemsRemoved[1]
   }
-  return ["this month", "last month", ...copyList];
+  return ["this month", "last month", ...list];
 };
 
 /**
@@ -52,20 +54,17 @@ const reOrderMonthList = () => {
  * @returns arry
  */
 const reOrderDaysList = () => {
-  let list, currentObj, previousObj, current;
+  let currentObj, previousObj;
 
-  current = today;
-  list = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  let list = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
-  let copyList = list.slice();
-
-  if (current === 0) {
+  if (today === 0) {
     previousObj = list.pop();
     currentObj = list.shift();
   } else {
-    currentObj = list[current - 1];
-    previousObj = list[current - 2];
-    const removed = list.splice(current - 1, 2);
+    const itemsRemoved = list.splice(today - 1, 2).reverse();
+    currentObj = itemsRemoved[0]
+    previousObj = itemsRemoved[1]
   }
   return ["today", "yesterday", ...list];
 };
@@ -78,7 +77,6 @@ const reOrderDaysList = () => {
   return Object.keys(data).map(
       (key) => data[key]
     );
-
 }
 
 /**
@@ -89,7 +87,19 @@ const reOrderDaysList = () => {
 
 const reOrderValues = (data) => {
   let coppy = convertToArray(data);
-  const removed = coppy.splice(today - 2, 2).reverse();
+  const removed = coppy.splice(today - 1, 2).reverse();
+  return [...removed, ...coppy].map((x) => x?.total);
+};
+
+/**
+ * return an array of values
+ * @param {object} 
+ * @returns array
+ */
+
+ const reOrderMonthValues = (data) => {
+  let coppy = convertToArray(data);
+  const removed = coppy.splice(currentMonth - 1, 2).reverse();
   return [...removed, ...coppy].map((x) => x?.total);
 };
 

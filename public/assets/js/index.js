@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Get todays sales from sales_over_time_week
     let lastMonthSale = {};
-    let lastMonthSaleObj = SalesOverTimeYear[currentMonth];
+    let lastMonthSaleObj = SalesOverTimeYear[currentMonth-1];
+
+    // console.log({currentMonth, SalesOverTimeYear});
 
     lastMonthSale.title = "Last Month";
     lastMonthSale.orders = lastMonthSaleObj?.orders;
@@ -122,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
       lastMonthSale,
     ];
 
-   
 
     renderSalesSummay(saleSummary);
     renderChart(reOrderDaysList(), reOrderValues(SalesOverTimeWeek));
@@ -146,8 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (request.status === 401) {
         const token = getRefreshToken();
-
-      
         if (token) {
           getDashboardInfo();
         }
@@ -161,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  /**Initial call */
   getDashboardInfo();
 
 
@@ -205,11 +205,8 @@ document.addEventListener("DOMContentLoaded", () => {
       renderChart(reOrderDaysList(), reOrderValues(SalesOverTimeWeek));
     } else {
         chartTitle.innerText = "Revenue (Last 12 months)"
-      renderChart(reOrderMonthList(), reOrderValues(SalesOverTimeYear));
+      renderChart(reOrderMonthList(), reOrderMonthValues(SalesOverTimeYear));
     }
-
-
-   
   });
 
 });

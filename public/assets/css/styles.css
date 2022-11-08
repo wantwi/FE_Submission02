@@ -14,7 +14,7 @@
   /* Login Page Styles */
   .login-wrapper{
     width: 350px;
-    margin: 200px auto;
+    margin: 5% auto;
     border: 5px solid gray;
     min-height: 400px;
     display: flex;
